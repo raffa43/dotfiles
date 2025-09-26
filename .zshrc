@@ -20,7 +20,7 @@ export PATH="$PATH:$HOME/.puro/shared/pub_cache/bin" # Added by Puro
 export PATH="$PATH:$HOME/.puro/envs/default/flutter/bin" # Added by Puro
 export PURO_ROOT="/home/rafaelsantos/.puro" # Added by Puro
 
-export CHROME_EXECUTABLE="/usr/bin/google-chrome-stable"
+export CHROME_EXECUTABLE="/usr/bin/chromium"
 
 alias dotgit='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 fastfetch
