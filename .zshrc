@@ -78,18 +78,9 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Use history substring search
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-export FZF_BASE=/usr/share/fzf
-
 ZSH_THEME="smt"
 
 eval "$(starship init zsh)"
-
-export PATH="$PATH:$HOME/.puro/bin" # Added by Puro
-export PATH="$PATH:$HOME/.puro/shared/pub_cache/bin" # Added by Puro
-export PATH="$PATH:$HOME/.puro/envs/default/flutter/bin" # Added by Puro
-export PURO_ROOT="/home/rafaelsantos/.puro" # Added by Puro
-
-export CHROME_EXECUTABLE="/usr/bin/chromium"
 
 alias dotgit='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 fastfetch
