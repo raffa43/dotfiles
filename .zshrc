@@ -12,6 +12,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/usr/share/oh-my-zsh"
 
+ZSH_THEME="smt"
+
 # Uncomment the following line if pasting URLs and other text is messed up.
 DISABLE_MAGIC_FUNCTIONS="true"
 
@@ -26,7 +28,15 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-[[ -z "${plugins[*]}" ]] && plugins=(git fzf extract)
+[[ -z "${plugins[*]}" ]] && plugins=(
+  git
+  fzf
+  extract
+  
+  zsh-history-substring-search
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -70,15 +80,6 @@ alias jctl="journalctl -p 3 -xb"
 
 # Recent installed packages
 alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
-
-# Fish-like syntax highlighting and autosuggestions
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# Use history substring search
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-
-ZSH_THEME="smt"
 
 eval "$(starship init zsh)"
 
