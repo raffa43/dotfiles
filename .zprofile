@@ -6,6 +6,12 @@ export PATH="$PATH:$HOME/.puro/shared/pub_cache/bin" # Added by Puro
 export PATH="$PATH:$HOME/.puro/envs/default/flutter/bin" # Added by Puro
 export PURO_ROOT="/Users/raffa43/.puro" # Added by Puro
 
-alias dotgit='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+# QT
+export PATH="/usr/local/opt/qt@5/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/qt@5/lib"
+export CPPFLAGS="-I/usr/local/opt/qt@5/include"
 
-fastfetch
+# Java
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+export CPPFLAGS="-I/usr/local/opt/openjdk/include:$CPPFLAGS"
+
