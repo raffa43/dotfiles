@@ -1,6 +1,8 @@
 
 eval "$(/usr/local/bin/brew shellenv)"
 
+export VK_LAYER_PATH="/usr/local/opt/vulkan-profiles/share/vulkan/explicit_layer.d"
+
 export PATH="$PATH:$HOME/.puro/bin" # Added by Puro
 export PATH="$PATH:$HOME/.puro/shared/pub_cache/bin" # Added by Puro
 export PATH="$PATH:$HOME/.puro/envs/default/flutter/bin" # Added by Puro
