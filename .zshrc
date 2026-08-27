@@ -1,5 +1,3 @@
-# ~/.zshrc
-
 # 1. Base CachyOS Settings & Oh-My-Zsh
 DISABLE_MAGIC_FUNCTIONS="true"
 ENABLE_CORRECTION="true"
@@ -15,7 +13,11 @@ fi
 plugins=(git fzf extract ssh ssh-agent)
 [[ -f "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh"
 
-# 2. History & Colors (Preserved from CachyOS)
+# 2. History & Colors
+# Do not save commands that start with a space
+setopt HIST_IGNORE_SPACE
+setopt HIST_IGNORE_ALL_DUPS
+
 export HISTCONTROL=ignoreboth
 export HISTORY_IGNORE="(\&|[bf]g|c|clear|history|exit|q|pwd|* --help)"
 export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
@@ -25,12 +27,13 @@ export LESS_TERMCAP_me="$(tput sgr0 2> /dev/null)"
 
 # 3. Universal Keybindings & Aliases
 bindkey '^z' undo
+bindkey '^[^?' backward-kill-word
+bindkey '^[w' backward-kill-word
 
 alias make="make -j$(nproc 2>/dev/null || sysctl -n hw.logicalcpu)"
 alias ninja="ninja -j$(nproc 2>/dev/null || sysctl -n hw.logicalcpu)"
 alias n="ninja"
 alias c="clear"
-alias dotgit='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # 4. OS-Specific Plugins & Aliases
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
@@ -58,6 +61,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # MacOS Aliases
     alias mpv="/Applications/mpv.app/Contents/MacOS/mpv"
+
     # macOS Plugin Sourcing
     HOMEBREW_PREFIX=$(brew --prefix)
     [[ -f $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
