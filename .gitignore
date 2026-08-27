@@ -1,0 +1,8 @@
+# Ignore the entire .config folder by default
+.config/
+
+# Now, make an exception for folders you DO want to track.
+# The '!' negates the ignore rule for that specific path.
+!.config/nvim/
+!.config/kitty/
+!.config/starship.toml
