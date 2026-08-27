@@ -34,6 +34,7 @@ alias make="make -j$(nproc 2>/dev/null || sysctl -n hw.logicalcpu)"
 alias ninja="ninja -j$(nproc 2>/dev/null || sysctl -n hw.logicalcpu)"
 alias n="ninja"
 alias c="clear"
+alias dotgit='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # 4. OS-Specific Plugins & Aliases
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
