@@ -1,5 +1,5 @@
 # 1. Base CachyOS Settings & Oh-My-Zsh
-DISABLE_MAGIC_FUNCTIONS="true"
+DISABLE_MAGIC_FUNCTIONS="false"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
@@ -7,10 +7,35 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     export ZSH="$HOME/.oh-my-zsh"
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     export ZSH="/usr/share/oh-my-zsh"
-    [[ ! -d "$ZSH" ]] && export ZSH="$HOME/.oh-my-zsh"
+    zstyle :omz:plugins:ssh-agent helper ksshaskpass
+
+    #[[ ! -d "$ZSH" ]] && export ZSH="$HOME/.oh-my-zsh"
 fi
 
-plugins=(git fzf extract ssh ssh-agent)
+
+zstyle :omz:plugins:ssh-agent agent-forwarding yes
+zstyle :omz:plugins:ssh-agent honor-existing yes
+zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain␍
+zstyle :omz:plugins:ssh-agent identities ~/.config/ssh/{id_ed2551}
+
+plugins=(
+  git 
+  fzf 
+  extract 
+
+  ssh 
+  ssh-agent
+  
+  screen
+  kitty
+  alias-finder
+
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  zsh-history-substring-search
+)
+
+
 [[ -f "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh"
 
 # 2. History & Colors
@@ -38,6 +63,7 @@ alias dotgit='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # 4. OS-Specific Plugins & Aliases
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+
     # Arch/CachyOS Aliases
     alias rmpkg="sudo pacman -Rsn"
     alias cleanch="sudo pacman -Scc"
@@ -59,22 +85,38 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     [[ -f /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]] && source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
     [[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh
 
+    # MacOs
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # MacOS Aliases
-    alias mpv="/Applications/mpv.app/Contents/MacOS/mpv"
-
+    # alias mpv="/Applications/mpv.app/Contents/MacOS/mpv"
     # macOS Plugin Sourcing
     HOMEBREW_PREFIX=$(brew --prefix)
-    [[ -f $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    [[ -f $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    [[ -f $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh ]] && source $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+    AUTOSUGGEST=$ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+    HISTORY_SEARCH=$ZSH/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+    SYNTAX_HIGHLIGHT=$ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+
+    #[[ -f $AUTOSUGGEST ]] && source $AUTOSUGGEST 
+
+    #[[ -f $SYNTAX_HIGHLIGHT ]] && source $SYNTAX_HIGHLIGHT
+
+    #[[ -f $HISTORY_SEARCH ]] && source $HISTORY_SEARCH
+
 fi
 
-# 5. Prompt & Fetch Initialization
-if command -v starship &>/dev/null; then
-    eval "$(starship init zsh)"
+
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets pattern cursor)
+
+
+# Only initialize starship if NOT connected via SSH
+if [[ -z "$SSH_CONNECTION" ]]; then
+    if command -v starship &>/dev/null; then
+        eval "$(starship init zsh)"
+    fi
 fi
 
+# Run fastfetch for all interactive sessions
 if [[ -o interactive ]]; then
    fastfetch
 fi
