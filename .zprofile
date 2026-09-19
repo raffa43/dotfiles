@@ -7,7 +7,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   [[ -f "$HOME/.swiftly/env.sh" ]] && . "$HOME/.swiftly/env.sh"
 
   # MacPorts
-  export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+  export PATH="/opt/local/bin:/opt/local/sbin:/Users/rafa/.local/bin:$PATH"
 
   export VULKAN_SDK="/Users/rafa/Tools/VulkanSDK/1.3.204.1/macOS"
 

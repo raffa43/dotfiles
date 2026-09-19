@@ -3,19 +3,20 @@ DISABLE_MAGIC_FUNCTIONS="false"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
+#MacOS Oh-My-Zsh setup
 if [[ "$OSTYPE" == "darwin"* ]]; then
     export ZSH="$HOME/.oh-my-zsh"
+    zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain
+#CachyOS Oh-My-Zsh setup
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     export ZSH="/usr/share/oh-my-zsh"
     zstyle :omz:plugins:ssh-agent helper ksshaskpass
 
-    #[[ ! -d "$ZSH" ]] && export ZSH="$HOME/.oh-my-zsh"
 fi
 
 
 zstyle :omz:plugins:ssh-agent agent-forwarding yes
 zstyle :omz:plugins:ssh-agent honor-existing yes
-zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain␍
 zstyle :omz:plugins:ssh-agent identities ~/.config/ssh/{id_ed2551}
 
 plugins=(
@@ -29,6 +30,7 @@ plugins=(
   screen
   kitty
   alias-finder
+  thefuck
 
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -80,10 +82,10 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     export FZF_BASE=/usr/share/fzf
 
     # Linux Plugin Sourcing
-    [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    [[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-    [[ -f /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]] && source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-    [[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh
+    #[[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    #[[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    #[[ -f /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]] && source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+    #[[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh
 
     # MacOs
 elif [[ "$OSTYPE" == "darwin"* ]]; then
