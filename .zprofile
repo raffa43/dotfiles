@@ -32,9 +32,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   #export CMAKE_PREFIX_PATH="/usr/local/opt/opencl-icd-loader:/usr/local/opt/opencl-clhpp-headers${CMAKE_PREFIX_PATH:+:$CMAKE_PREFIX_PATH}"
 
   #Fix kitten ssh terminfo path resolution
-  if [[ -n "$SSH_CONNECTION" && "$TERM" == "xterm-kitty" ]]; then
-       export TERMINFO_DIRS="$HOME/.terminfo:/usr/share/terminfo"
-  fi
+  #if [[ -n "$SSH_CONNECTION" && "$TERM" == "xterm-kitty" ]]; then
+  #     export TERMINFO_DIRS="$HOME/.terminfo:/usr/share/terminfo"
+  #fi
 
 ## Linux Specific
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
