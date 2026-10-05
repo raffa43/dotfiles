@@ -1,7 +1,7 @@
 # vim:fileencoding=utf-8:foldmethod=marker
 
 # BEGIN_KITTY_THEME
-# Solarized Dark
+# Copland OS
 include current-theme.conf
 # END_KITTY_THEME
 
@@ -1649,7 +1649,7 @@ include current-theme.conf
 
 #: The foreground and background colors.
 
-# background_opacity 1.0
+background_opacity 0.80
 
 #: The opacity of the terminal background color. A number between zero
 #: and one, where one is opaque and zero is fully transparent. This
@@ -1679,7 +1679,7 @@ include current-theme.conf
 #: will only work if dynamic_background_opacity was enabled in the
 #: original config.
 
-# background_blur 0
+background_blur 3
 
 #: Set to a positive value to enable background blur (blurring of the
 #: visuals behind a transparent window) on platforms that support it.
@@ -1965,7 +1965,7 @@ include current-theme.conf
 #: See rc_custom_auth <https://sw.kovidgoyal.net/kitty/remote-
 #: control/#rc-custom-auth> for details.
 
-# allow_remote_control no
+ allow_remote_control yes
 
 #: Allow other programs to control kitty. If you turn this on, other
 #: programs can control all aspects of kitty, including sending text
@@ -3267,3 +3267,16 @@ include current-theme.conf
 #: }}}
 
 #: }}}
+
+
+# BEGIN_KITTY_FONTS
+font_family      family="SF Mono"
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+# END_KITTY_FONTS
+#
+
+#macos_option_as_alt yes
+
+#shell zsh --login

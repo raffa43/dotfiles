@@ -4,16 +4,18 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 #MacOS Oh-My-Zsh setup
-if [[ "$OSTYPE" == "darwin"* ]]; then
+if [[ "$OSTYPE" == "*darwin"* ]]; then
+
+    console.log("Darwin login");
     export ZSH="$HOME/.oh-my-zsh"
     zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain
+
 #CachyOS Oh-My-Zsh setup
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     export ZSH="/usr/share/oh-my-zsh"
     zstyle :omz:plugins:ssh-agent helper ksshaskpass
 
 fi
-
 
 zstyle :omz:plugins:ssh-agent agent-forwarding yes
 zstyle :omz:plugins:ssh-agent honor-existing yes
@@ -27,10 +29,7 @@ plugins=(
   ssh 
   ssh-agent
   
-  screen
   kitty
-  alias-finder
-  thefuck
 
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -94,9 +93,9 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS Plugin Sourcing
     HOMEBREW_PREFIX=$(brew --prefix)
 
-    AUTOSUGGEST=$ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-    HISTORY_SEARCH=$ZSH/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-    SYNTAX_HIGHLIGHT=$ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+    #AUTOSUGGEST=$ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+    #HISTORY_SEARCH=$ZSH/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+    #SYNTAX_HIGHLIGHT=$ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 
     #[[ -f $AUTOSUGGEST ]] && source $AUTOSUGGEST 
 
