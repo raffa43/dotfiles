@@ -3,6 +3,7 @@
 
 add_newline = true
 command_timeout = 2000
+scan_timeout = 2000
 
 # Two-line prompt: Context on top, input on bottom
 format = """
@@ -25,13 +26,14 @@ Macos = " "
 [directory]
 style = "bold blue"
 read_only = " "
-truncation_length = 3
+truncation_length = 4
 truncate_to_repo = true
 format = '[$path]($style)[$read_only]($read_only_style) '
 
 [git_branch]
 symbol = " "
 format = '[$symbol$branch(:$remote_branch)]($style) '
+style = "bold green"
 
 [git_status]
 format = '([\[$all_status$ahead_behind\]]($style) )'
@@ -66,6 +68,7 @@ detect_files = ['Makefile', 'CMakeLists.txt', 'build.ninja']
 [python]
 symbol = " "
 format = '[$symbol$pyenv_prefix($version )(\($virtualenv\) )]($style) '
+style = "bold blue"
 
 [dart]
 symbol = " "
@@ -76,3 +79,4 @@ symbol = " "
 
 [docker_context]
 symbol = " "
+style = "bold cyan"

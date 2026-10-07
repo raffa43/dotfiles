@@ -78,6 +78,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     alias jctl="journalctl -p 3 -xb"
     alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
     alias paru-s="paru -S --sudoloop --needed --noconfirm"
+    alias gamemoderun="game-performance"
     export FZF_BASE=/usr/share/fzf
 
     # Linux Plugin Sourcing
@@ -109,6 +110,17 @@ fi
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets pattern cursor)
 
+
+# Explicitly declare the associative array to prevent subscript errors
+typeset -A ZSH_HIGHLIGHT_STYLES
+
+# High-contrast Green/Blue/Cyan syntax highlighting (No Purple)
+ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[path]='fg=white,underline'
 
 # Only initialize starship if NOT connected via SSH
 if [[ -z "$SSH_CONNECTION" ]]; then
