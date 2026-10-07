@@ -1,12 +1,10 @@
 # 1. Base CachyOS Settings & Oh-My-Zsh
-DISABLE_MAGIC_FUNCTIONS="false"
+DISABLE_MAGIC_FUNCTIONS="true"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 #MacOS Oh-My-Zsh setup
-if [[ "$OSTYPE" == "*darwin"* ]]; then
-
-    console.log("Darwin login");
+if [[ "$OSTYPE" == "darwin"* ]]; then
     export ZSH="$HOME/.oh-my-zsh"
     zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain
 
@@ -14,7 +12,6 @@ if [[ "$OSTYPE" == "*darwin"* ]]; then
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     export ZSH="/usr/share/oh-my-zsh"
     zstyle :omz:plugins:ssh-agent helper ksshaskpass
-
 fi
 
 zstyle :omz:plugins:ssh-agent agent-forwarding yes
@@ -79,20 +76,23 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
     alias paru-s="paru -S --sudoloop --needed --noconfirm"
     alias gamemoderun="game-performance"
-    export FZF_BASE=/usr/share/fzf
 
-    # Linux Plugin Sourcing
-    #[[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    #[[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-    #[[ -f /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]] && source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-    #[[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh
+    export FZF_BASE=/usr/share/fzf
+    
+    source $HOME/Tools/zsh_scripts/ffdesc.zsh
 
     # MacOs
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    # MacOS Aliases
-    # alias mpv="/Applications/mpv.app/Contents/MacOS/mpv"
     # macOS Plugin Sourcing
-    HOMEBREW_PREFIX=$(brew --prefix)
+    #HOMEBREW_PREFIX=$(brew --prefix)
+    # Disabled in favor of MacPorts
+
+    MACPORTS_PREFIX="/opt/local"
+    export MACPORTS_PREFIX
+
+    # MacOS Aliases
+    #alias mpv="/Applications/mpv.app/Contents/MacOS/mpv"
+    alias youtube-dl="$MACPORTS_PREFIX/bin/yt-dlp --js-runtimes deno:$MACPORTS_PREFIX/bin/deno"
 
     #AUTOSUGGEST=$ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
     #HISTORY_SEARCH=$ZSH/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -107,7 +107,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 
-
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets pattern cursor)
 
 
@@ -115,12 +114,12 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets pattern cursor)
 typeset -A ZSH_HIGHLIGHT_STYLES
 
 # High-contrast Green/Blue/Cyan syntax highlighting (No Purple)
-ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
-ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan,bold'
-ZSH_HIGHLIGHT_STYLES[builtin]='fg=cyan'
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue'
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue'
-ZSH_HIGHLIGHT_STYLES[path]='fg=white,underline'
+#ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
+#ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan,bold'
+#ZSH_HIGHLIGHT_STYLES[builtin]='fg=cyan'
+#ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue'
+#ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue'
+#ZSH_HIGHLIGHT_STYLES[path]='fg=white,underline'
 
 # Only initialize starship if NOT connected via SSH
 if [[ -z "$SSH_CONNECTION" ]]; then
