@@ -93,6 +93,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     # MacOS Aliases
     #alias mpv="/Applications/mpv.app/Contents/MacOS/mpv"
     alias youtube-dl="$MACPORTS_PREFIX/bin/yt-dlp --js-runtimes deno:$MACPORTS_PREFIX/bin/deno"
+    
+    source $HOME/Tools/zsh_scripts/ffdesc.zsh
 
     #AUTOSUGGEST=$ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
     #HISTORY_SEARCH=$ZSH/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh

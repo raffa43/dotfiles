@@ -8,29 +8,22 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
   # Swiftly
   [[ -f "$HOME/.swiftly/env.sh" ]] && . "$HOME/.swiftly/env.sh"
-  
-
-  # MacPorts
-  export PATH="/opt/local/bin:/opt/local/sbin:$HOME/.local/bin:$PATH" 
-
-  export LDFLAGS="-L/opt/local/lib/openssl-3 -L/opt/local/lib $LDFLAGS"
-  export CPPFLAGS="-I/opt/local/include/openssl-3 -I/opt/local/include $CPPFLAGS"
-  export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:/opt/local/lib/openssl-3/pkgconfig:$VULKAN_SDK/lib/pkgconfig:$PKG_CONFIG_PATH" # ${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
 
   export VULKAN_SDK="/Users/rafa/Tools/VulkanSDK/1.3.296.0/macOS"
+
+  # MacPorts
+  # export PATH="/opt/local/bin:/opt/local/sbin:$HOME/.local/bin:$PATH" 
+  export PATH="/opt/local/bin:/opt/local/sbin:$VULKAN_SDK/bin:$HOME/.local/bin:$PATH"
+  
   # export PATH="$PATH:$VULKAN_SDK/bin"
-  export PATH="/opt/local/bin:$VULKAN_SDK/bin:$PATH"
   export DYLD_LIBRARY_PATH="$VULKAN_SDK/lib:${DYLD_LIBRARY_PATH:-}"
   export VK_ADD_LAYER_PATH="$VULKAN_SDK/share/vulkan/explicit_layer.d"
   export VK_ICD_FILENAMES="$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json"
   export VK_DRIVER_FILES="$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json"
-  
 
-
-  # Fix kitten ssh terminfo path resolution
-  if [[ -n "$SSH_CONNECTION" && "$TERM" == "xterm-kitty" ]]; then
-       export TERMINFO_DIRS="$HOME/.terminfo:/usr/share/terminfo"
-  fi
+  export LDFLAGS="-L/opt/local/lib/openssl-3 -L/opt/local/lib $LDFLAGS"
+  export CPPFLAGS="-I/opt/local/include/openssl-3 -I/opt/local/include $CPPFLAGS"
+  export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:/opt/local/lib/openssl-3/pkgconfig:$VULKAN_SDK/lib/pkgconfig:$PKG_CONFIG_PATH"  
 
 ## Linux Specific
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
@@ -46,7 +39,8 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   export ANV_VIDEO_ENCODE=1
   export ANV_DEBUG=video-decode,video-encode
   
-  export QSG_USE_SIMPLE_ANIMATION_DRIVER=1 QSG_NO_VSYNC=1
+  export QSG_USE_SIMPLE_ANIMATION_DRIVER=1
+  export QSG_NO_VSYNC=1
   export MOZ_ENABLE_WAYLAND=0
 
   # Puro & Flutter
@@ -55,4 +49,9 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
   export CHROME_EXECUTABLE="/usr/bin/google-chrome-stable"
 
+fi
+
+# Fix kitten ssh terminfo path resolution
+if [[ -n "$SSH_CONNECTION" && "$TERM" == "xterm-kitty" ]]; then
+     export TERMINFO_DIRS="$HOME/.terminfo:/usr/share/terminfo"
 fi
