@@ -109,7 +109,7 @@ fi
 source $HOME/Tools/zsh_scripts/ffdesc.zsh
 alias youtube-dl=ytdl-secure
 
-ZSH_HIGHLIGHT_HIGHLIGHTERS+=(brackets pattern cursor)
+ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets pattern cursor)
 
 # Explicitly declare the associative array to prevent subscript errors
 typeset -A ZSH_HIGHLIGHT_STYLES

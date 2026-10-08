@@ -9,33 +9,22 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   # Swiftly
   [[ -f "$HOME/.swiftly/env.sh" ]] && . "$HOME/.swiftly/env.sh"
 
-  export VULKAN_SDK="/Users/rafa/Tools/VulkanSDK/1.3.296.0/macOS"
+  #export VULKAN_SDK="/Users/rafa/Tools/VulkanSDK/1.3.296.0/macOS"
 
   # MacPorts
   # export PATH="/opt/local/bin:/opt/local/sbin:$HOME/.local/bin:$PATH" 
   export PATH="/opt/local/bin:/opt/local/sbin:$VULKAN_SDK/bin:$HOME/.local/bin:$PATH"
   
   # export PATH="$PATH:$VULKAN_SDK/bin"
-  export DYLD_LIBRARY_PATH="$VULKAN_SDK/lib:${DYLD_LIBRARY_PATH:-}"
-  export VK_ADD_LAYER_PATH="$VULKAN_SDK/share/vulkan/explicit_layer.d"
-  export VK_ICD_FILENAMES="$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json"
-  export VK_DRIVER_FILES="$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json"
-  export VK_LAYER_SETTINGS_PATH="$VULKAN_SDK/share/vulkan/config/vk_layer_settings.txt"
+  #export DYLD_LIBRARY_PATH="$VULKAN_SDK/lib:${DYLD_LIBRARY_PATH:-}"
+  #export VK_ADD_LAYER_PATH="$VULKAN_SDK/share/vulkan/explicit_layer.d"
+  #export VK_ICD_FILENAMES="$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json"
+  #export VK_DRIVER_FILES="$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json"
+  #export VK_LAYER_SETTINGS_PATH="$VULKAN_SDK/share/vulkan/config/vk_layer_settings.txt"
 
   export LDFLAGS="-L/opt/local/lib/openssl-3 -L/opt/local/lib $LDFLAGS"
   export CPPFLAGS="-I/opt/local/include/openssl-3 -I/opt/local/include $CPPFLAGS"
   export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:/opt/local/lib/openssl-3/pkgconfig:$VULKAN_SDK/lib/pkgconfig:$PKG_CONFIG_PATH"  
-
-  export ANV_QUEUE_THREAD_DISABLE=1
-  export ANV_VIDEO_DECODE=1
-  export ANV_VIDEO_ENCODE=1
-  export ANV_DEBUG=video-decode,video-encode
-  export VK_LOADER_DEBUG=all
-  export VK_PRESENT_MODE_FIFO_RELAXED_KHR=3
-  export VK_KHRONOS_VALIDATION_GPUAV_FORCE_ON_ROBUSTNESS=1
-  export VK_KHRONOS_VALIDATION_CHECK_SHADERS_CACHING=0
-  export VK_KHRONOS_VALIDATION_PRINTF_ENABLE=1
-  export MVK_CONFIG_SYNCHRONOUS_QUEUE_SUBMITS=0
 
 ## Linux Specific
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
@@ -46,7 +35,9 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   export OMP_NUM_THREADS=4
   export TF_ENABLE_ONEDNN_OPTS=1
   
-  export ANV_QUEUE_THREAD_DISABLE=1
+  export LIBVA_DRIVER_NAME=iHD
+  export VDPAU_DRIVER=va_gl
+  export VK_VIDEO_DECODE_ENABLE=1
   export ANV_VIDEO_DECODE=1
   export ANV_VIDEO_ENCODE=1
   export ANV_DEBUG=video-decode,video-encode
