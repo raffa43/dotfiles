@@ -20,6 +20,17 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   export VK_ADD_LAYER_PATH="$VULKAN_SDK/share/vulkan/explicit_layer.d"
   export VK_ICD_FILENAMES="$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json"
   export VK_DRIVER_FILES="$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json"
+  
+  export ANV_QUEUE_THREAD_DISABLE=1
+  export ANV_VIDEO_DECODE=1
+  export ANV_VIDEO_ENCODE=1
+  export ANV_DEBUG=video-decode,video-encode
+  export VK_LOADER_DEBUG=all
+  export VK_PRESENT_MODE_FIFO_RELAXED_KHR=3
+  export VK_KHRONOS_VALIDATION_GPUAV_FORCE_ON_ROBUSTNESS=1
+  export VK_KHRONOS_VALIDATION_CHECK_SHADERS_CACHING=0
+  export VK_KHRONOS_VALIDATION_PRINTF_ENABLE=1
+  export MVK_CONFIG_SYNCHRONOUS_QUEUE_SUBMITS=0
 
   export LDFLAGS="-L/opt/local/lib/openssl-3 -L/opt/local/lib $LDFLAGS"
   export CPPFLAGS="-I/opt/local/include/openssl-3 -I/opt/local/include $CPPFLAGS"

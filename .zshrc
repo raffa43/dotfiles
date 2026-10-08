@@ -1,5 +1,5 @@
 # 1. Base CachyOS Settings & Oh-My-Zsh
-DISABLE_MAGIC_FUNCTIONS="true"
+DISABLE_MAGIC_FUNCTIONS="false"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
@@ -112,7 +112,7 @@ alias youtube-dl=ytdl-secure
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(brackets pattern cursor)
 
 # Explicitly declare the associative array to prevent subscript errors
-typeset -A ZSH_HIGHLIGHT_STYLES
+#typeset -A ZSH_HIGHLIGHT_STYLES
 
 # High-contrast Green/Blue/Cyan syntax highlighting (No Purple)
 #ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
