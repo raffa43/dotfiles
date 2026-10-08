@@ -20,7 +20,12 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   export VK_ADD_LAYER_PATH="$VULKAN_SDK/share/vulkan/explicit_layer.d"
   export VK_ICD_FILENAMES="$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json"
   export VK_DRIVER_FILES="$VULKAN_SDK/share/vulkan/icd.d/MoltenVK_icd.json"
-  
+  export VK_LAYER_SETTINGS_PATH="$VULKAN_SDK/share/vulkan/config/vk_layer_settings.txt"
+
+  export LDFLAGS="-L/opt/local/lib/openssl-3 -L/opt/local/lib $LDFLAGS"
+  export CPPFLAGS="-I/opt/local/include/openssl-3 -I/opt/local/include $CPPFLAGS"
+  export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:/opt/local/lib/openssl-3/pkgconfig:$VULKAN_SDK/lib/pkgconfig:$PKG_CONFIG_PATH"  
+
   export ANV_QUEUE_THREAD_DISABLE=1
   export ANV_VIDEO_DECODE=1
   export ANV_VIDEO_ENCODE=1
@@ -31,10 +36,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   export VK_KHRONOS_VALIDATION_CHECK_SHADERS_CACHING=0
   export VK_KHRONOS_VALIDATION_PRINTF_ENABLE=1
   export MVK_CONFIG_SYNCHRONOUS_QUEUE_SUBMITS=0
-
-  export LDFLAGS="-L/opt/local/lib/openssl-3 -L/opt/local/lib $LDFLAGS"
-  export CPPFLAGS="-I/opt/local/include/openssl-3 -I/opt/local/include $CPPFLAGS"
-  export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:/opt/local/lib/openssl-3/pkgconfig:$VULKAN_SDK/lib/pkgconfig:$PKG_CONFIG_PATH"  
 
 ## Linux Specific
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
