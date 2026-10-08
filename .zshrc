@@ -79,7 +79,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 
     export FZF_BASE=/usr/share/fzf
     
-    source $HOME/Tools/zsh_scripts/ffdesc.zsh
+    alias youtube-dl=ytdl-secure
 
     # MacOs
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -92,9 +92,8 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 
     # MacOS Aliases
     #alias mpv="/Applications/mpv.app/Contents/MacOS/mpv"
-    alias youtube-dl="$MACPORTS_PREFIX/bin/yt-dlp --js-runtimes deno:$MACPORTS_PREFIX/bin/deno"
+    #alias youtube-dl="$MACPORTS_PREFIX/bin/yt-dlp --js-runtimes deno:$MACPORTS_PREFIX/bin/deno"
     
-    source $HOME/Tools/zsh_scripts/ffdesc.zsh
 
     #AUTOSUGGEST=$ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
     #HISTORY_SEARCH=$ZSH/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -108,6 +107,9 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 
 fi
 
+# Universal
+source $HOME/Tools/zsh_scripts/ffdesc.zsh
+alias youtube-dl=ytdl-secure
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets pattern cursor)
 
