@@ -1,0 +1,10 @@
+-- Run Quick_Scale automatically when a file is loaded.
+mp.register_event("file-loaded", function()
+    mp.add_timeout(0.95, function()
+        local dw = mp.get_property_number("display-width", 2880)
+        local dh = mp.get_property_number("display-height", 1800)
+        local w = math.min(dw, 2880)
+        local h = math.min(dh, 1800)
+        mp.commandv("script-message", "Quick_Scale", tostring(w), tostring(h), "1", "3")
+    end)
+end)

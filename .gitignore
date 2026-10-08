@@ -6,3 +6,8 @@
 !.config/nvim/
 !.config/kitty/
 !.config/starship.toml
+!.config/mpv/
+.config/mpv/mpv.conf
+.config/mpv/watch_later/
+.config/mpv/memo-history.log
+.config/mpv/shaders/cache/
