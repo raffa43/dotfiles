@@ -105,22 +105,23 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 
 fi
 
+ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets pattern cursor)
+
 # Universal
 source $HOME/Tools/zsh_scripts/ffdesc.zsh
-alias youtube-dl=ytdl-secure
-
-ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets pattern cursor)
+alias youtube-dl="ytdl-secure"
+alias mpwd="mpv --playlist=./ --resume-playback"
 
 # Explicitly declare the associative array to prevent subscript errors
 typeset -A ZSH_HIGHLIGHT_STYLES
 
 # High-contrast Green/Blue/Cyan syntax highlighting (No Purple)
-#ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
-#ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan,bold'
-#ZSH_HIGHLIGHT_STYLES[builtin]='fg=cyan'
-#ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue'
-#ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue'
-#ZSH_HIGHLIGHT_STYLES[path]='fg=white,underline'
+ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[path]='fg=white,underline'
 
 # Only initialize starship if NOT connected via SSH
 if [[ -z "$SSH_CONNECTION" ]]; then
