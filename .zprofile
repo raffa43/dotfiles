@@ -12,8 +12,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   #export VULKAN_SDK="/Users/rafa/Tools/VulkanSDK/1.3.296.0/macOS"
 
   # MacPorts
-  # export PATH="/opt/local/bin:/opt/local/sbin:$HOME/.local/bin:$PATH" 
-  export PATH="/opt/local/bin:/opt/local/sbin:$VULKAN_SDK/bin:$HOME/.local/bin:$PATH"
+  # export PATH="/opt/local/bin:/opt/local/sbin:$HOME/.local/bin:$PATH"  :$VULKAN_SDK/bin 
+  export PATH="/opt/local/bin:/opt/local/sbin:$HOME/.local/bin:$PATH"
   
   # export PATH="$PATH:$VULKAN_SDK/bin"
   #export DYLD_LIBRARY_PATH="$VULKAN_SDK/lib:${DYLD_LIBRARY_PATH:-}"
@@ -24,8 +24,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
   export LDFLAGS="-L/opt/local/lib/openssl-3 -L/opt/local/lib $LDFLAGS"
   export CPPFLAGS="-I/opt/local/include/openssl-3 -I/opt/local/include $CPPFLAGS"
-  export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:/opt/local/lib/openssl-3/pkgconfig:$VULKAN_SDK/lib/pkgconfig:$PKG_CONFIG_PATH"  
-
+  export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:/opt/local/lib/openssl-3/pkgconfig:$PKG_CONFIG_PATH"  
+  # :$VULKAN_SDK/lib/pkgconfig
+  #
 ## Linux Specific
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   export PATH="$HOME/.local/bin:$PATH"
@@ -35,12 +36,11 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   export OMP_NUM_THREADS=4
   export TF_ENABLE_ONEDNN_OPTS=1
   
-  export LIBVA_DRIVER_NAME=iHD
-  export VDPAU_DRIVER=va_gl
-  export VK_VIDEO_DECODE_ENABLE=1
-  export ANV_VIDEO_DECODE=1
-  export ANV_VIDEO_ENCODE=1
-  export ANV_DEBUG=video-decode,video-encode
+  #export LIBVA_DRIVER_NAME=iHD
+  #export VK_VIDEO_DECODE_ENABLE=1
+  #export ANV_VIDEO_DECODE=1
+  #export ANV_VIDEO_ENCODE=1
+  #export ANV_DEBUG=video-decode,video-encode
   
   export QSG_USE_SIMPLE_ANIMATION_DRIVER=1
   export QSG_NO_VSYNC=1

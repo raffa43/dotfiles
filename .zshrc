@@ -75,11 +75,13 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     alias jctl="journalctl -p 3 -xb"
     alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
     alias paru-s="paru -S --sudoloop --needed --noconfirm"
-    alias gamemoderun="game-performance"
+    # alias gamemoderun="game-performance"
 
     export FZF_BASE=/usr/share/fzf
     
-    # MacOs
+    [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+
+# MacOs
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS Plugin Sourcing
     #HOMEBREW_PREFIX=$(brew --prefix)
@@ -106,11 +108,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets pattern cursor)
-
-# Universal
-source $HOME/Tools/zsh_scripts/ffdesc.zsh
-alias youtube-dl="ytdl-secure"
-alias mpwd="mpv --playlist=./ --resume-playback"
 
 # Explicitly declare the associative array to prevent subscript errors
 typeset -A ZSH_HIGHLIGHT_STYLES
