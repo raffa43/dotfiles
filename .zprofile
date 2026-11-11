@@ -36,11 +36,10 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   export OMP_NUM_THREADS=4
   export TF_ENABLE_ONEDNN_OPTS=1
   
-  #export LIBVA_DRIVER_NAME=iHD
-  #export VK_VIDEO_DECODE_ENABLE=1
-  #export ANV_VIDEO_DECODE=1
-  #export ANV_VIDEO_ENCODE=1
-  #export ANV_DEBUG=video-decode,video-encode
+  export VK_VIDEO_DECODE_ENABLE=1
+  export ANV_VIDEO_DECODE=1
+  export ANV_VIDEO_ENCODE=1
+  export ANV_DEBUG=video-decode,video-encode
   
   export QSG_USE_SIMPLE_ANIMATION_DRIVER=1
   export QSG_NO_VSYNC=1
