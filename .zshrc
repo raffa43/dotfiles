@@ -1,5 +1,5 @@
 # 1. Base CachyOS Settings & Oh-My-Zsh
-DISABLE_MAGIC_FUNCTIONS="false"
+DISABLE_MAGIC_FUNCTIONS="true"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
@@ -78,8 +78,10 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # alias gamemoderun="game-performance"
 
     export FZF_BASE=/usr/share/fzf
-    
-    [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
+
+
+    #[ -f /opt/miniconda3/etc/profile.d/conda.sh ] && 
+    source /opt/miniconda3/etc/profile.d/conda.sh
 
 # MacOs
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -104,6 +106,11 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     #[[ -f $SYNTAX_HIGHLIGHT ]] && source $SYNTAX_HIGHLIGHT
 
     #[[ -f $HISTORY_SEARCH ]] && source $HISTORY_SEARCH
+    #
+    #
+    source /opt/local/share/fzf/shell/key-bindings.zsh
+    source /opt/local/share/fzf/shell/completion.zsh
+
 
 fi
 
