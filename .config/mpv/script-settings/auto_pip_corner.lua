@@ -73,13 +73,13 @@ local function snap_to_bottom_left()
         mp.add_timeout(0.6, function()
             mp.set_property_bool("window-maximized", false)
             mp.set_property("geometry", geom)
-            is_snapped = true
+            is_snapped = false
             updating = false
         end)
     else
         mp.set_property_bool("window-maximized", false)
         mp.set_property("geometry", geom)
-        is_snapped = true
+        is_snapped = false
         updating = false
     end
 end
@@ -103,12 +103,12 @@ local has_gained_focus = false
 
 local function on_focus_change(name, focused)
     if focused == nil or is_loading then return end
-    if focused == true then
+    if focused == true then 
         has_gained_focus = true
-        restore_geometry()
-    elseif focused == false then
-        if not has_gained_focus then return end
-        snap_to_bottom_left()
+        --restore_geometry()
+    --elseif focused == false then
+        --if not has_gained_focus then return end
+        --snap_to_bottom_left()
     end
 end
 

@@ -93,9 +93,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     export MACPORTS_PREFIX
 
     # MacOS Aliases
-    #alias mpv="/Applications/mpv.app/Contents/MacOS/mpv"
-    #alias youtube-dl="$MACPORTS_PREFIX/bin/yt-dlp --js-runtimes deno:$MACPORTS_PREFIX/bin/deno"
-    
+    alias mpwd='mpv --playlist=$(pwd) '
 
     #AUTOSUGGEST=$ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
     #HISTORY_SEARCH=$ZSH/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -116,16 +114,19 @@ fi
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main brackets pattern cursor)
 
+export FZF_DEFAULT_OPTS="--color=bg+:#0d1b2a,bg:#000000,spinner:#00ff87,hl:#00dfff,fg:#ffffff,header:#00dfff,info:#00ff87,pointer:#00ff87,marker:#00ff87,prompt:#00ff87,hl+:#00ff87"
+
 # Explicitly declare the associative array to prevent subscript errors
 typeset -A ZSH_HIGHLIGHT_STYLES
 
-# High-contrast Green/Blue/Cyan syntax highlighting (No Purple)
-ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
-ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan,bold'
-ZSH_HIGHLIGHT_STYLES[builtin]='fg=cyan'
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue'
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue'
-ZSH_HIGHLIGHT_STYLES[path]='fg=white,underline'
+# Mid-tone high-saturation Green/Blue/Teal (readable on both #000000 and 85% white)
+ZSH_HIGHLIGHT_STYLES[command]='fg=#00b359,bold'              # Deep emerald green
+ZSH_HIGHLIGHT_STYLES[alias]='fg=#0099cc,bold'                # Strong cerulean blue
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=#00acc1,bold'              # Deep cyan
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=#0077ff,bold' # Vivid cobalt blue
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=#0077ff,bold' # Vivid cobalt blue
+ZSH_HIGHLIGHT_STYLES[path]='fg=#26a69a,underline'            # Rich teal (replaces white)
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=#00bfa5,bold'             # Mint-teal
 
 # Only initialize starship if NOT connected via SSH
 if [[ -z "$SSH_CONNECTION" ]]; then
