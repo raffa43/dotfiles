@@ -441,6 +441,7 @@ require('lib/utils')
 require('lib/text')
 require('lib/ass')
 require('lib/menus')
+DirPlaylist = require('lib/dir_playlist')
 
 -- Determine path to ziggy
 do
@@ -572,17 +573,27 @@ function set_state(name, value)
 	Elements:trigger('prop_' .. name, value)
 end
 
-function handle_file_end()
+function handle_file_end(finished_path)
+	if state.file_end_handled then return end
+	local is_looping_file = state.loop_file and state.loop_file ~= false and state.loop_file ~= 'no' and state.loop_file ~= 0
+	if is_looping_file then return end
+
+	if DirPlaylist:on_file_eof(finished_path or state.path) then
+		state.file_end_handled = true
+		return
+	end
+
 	local resume = false
-	if not state.loop_file then
-		if state.has_playlist then
-			resume = state.shuffle and navigate_playlist(1)
-		else
-			resume = options.autoload and navigate_directory(1)
-		end
+	if state.has_playlist then
+		resume = state.shuffle and navigate_playlist(1)
+	else
+		resume = options.autoload and navigate_directory(1)
 	end
 	-- Resume only when navigation happened
-	if resume then mp.command('set pause no') end
+	if resume then
+		state.file_end_handled = true
+		mp.command('set pause no')
+	end
 end
 local file_end_timer = mp.add_timeout(1, handle_file_end)
 file_end_timer:kill()
@@ -626,10 +637,12 @@ end
 --[[ STATE HOOKS ]]
 
 mp.register_event('file-loaded', function()
+	state.file_end_handled = false
 	local path = normalize_path(mp.get_property_native('path'))
 	itable_delete_value(state.history, path)
 	state.history[#state.history + 1] = path
 	set_state('path', path)
+	DirPlaylist:on_path_changed(path)
 
 	-- Flash top bar on requested file types
 	for _, type in ipairs(config.top_bar_flash_on) do
@@ -640,10 +653,11 @@ mp.register_event('file-loaded', function()
 	end
 end)
 mp.register_event('end-file', function(event)
+	local ended_path = state.path
 	set_state('path', nil)
 	if event.reason == 'eof' then
 		file_end_timer:kill()
-		handle_file_end()
+		handle_file_end(ended_path)
 	end
 end)
 mp.observe_property('playback-time', 'number', create_state_setter('time', function()
@@ -715,7 +729,7 @@ mp.observe_property('ab-loop-b', 'number', create_state_setter('ab_loop_b'))
 mp.observe_property('playlist-pos-1', 'number', create_state_setter('playlist_pos'))
 mp.observe_property('playlist-count', 'number', function(_, value)
 	set_state('playlist_count', value)
-	set_state('has_playlist', value > 1)
+	set_state('has_playlist', value > 0)
 	Elements:trigger('dispositions')
 end)
 mp.observe_property('fullscreen', 'bool', create_state_setter('fullscreen', update_fullormaxed))
@@ -791,7 +805,12 @@ mp.observe_property('demuxer-cache-state', 'native', function(prop, cache_state)
 end)
 mp.observe_property('display-fps', 'native', observe_display_fps)
 mp.observe_property('estimated-display-fps', 'native', update_render_delay)
-mp.observe_property('eof-reached', 'native', create_state_setter('eof_reached'))
+mp.observe_property('eof-reached', 'native', create_state_setter('eof_reached', function()
+	if state.eof_reached then
+		file_end_timer:kill()
+		handle_file_end()
+	end
+end))
 mp.observe_property('core-idle', 'native', create_state_setter('core_idle'))
 
 --[[ KEY BINDS ]]
@@ -896,7 +915,19 @@ bind_command('playlist', create_self_updating_menu_opener({
 		local from, to = event.from_index, event.to_index
 		mp.commandv('playlist-move', tostring(from - 1), tostring(to - (to > from and 0 or 1)))
 	end,
-	on_remove = function(event) mp.commandv('playlist-remove', tostring(event.value - 1)) end,
+	on_remove = function(event)
+		local filename = mp.get_property_native('playlist/' .. (event.value - 1) .. '/filename')
+		if filename then DirPlaylist:mark_user_removed(filename) end
+		mp.commandv('playlist-remove', tostring(event.value - 1))
+	end,
+	on_delete = function(event)
+		local filename = mp.get_property_native('playlist/' .. (event.value - 1) .. '/filename')
+		mp.commandv('playlist-remove', tostring(event.value - 1))
+		if filename and not is_protocol(filename) then
+			delete_file(normalize_path(filename))
+			DirPlaylist:sync_now()
+		end
+	end,
 }))
 bind_command('chapters', create_self_updating_menu_opener({
 	title = t('Chapters'),

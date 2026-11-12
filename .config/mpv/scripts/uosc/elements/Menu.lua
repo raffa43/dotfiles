@@ -166,6 +166,7 @@ function Menu:destroy()
 		utils.shared_script_property_set('uosc-menu-type', nil)
 	end
 	mp.set_property_native('user-data/uosc/menu/type', nil)
+	mp.set_property_native('user-data/uosc/menu/items', nil)
 end
 
 ---@param data MenuData
@@ -243,6 +244,20 @@ function Menu:update(data)
 
 	self.root, self.all, self.by_id = new_root, new_all, new_by_id
 	self.current = self.by_id[old_current_id] or self.root
+	local exported_items = {}
+	for idx, item in ipairs(self.current and self.current.items or {}) do
+		local val = item.value
+		if type(val) == 'table' or type(val) == 'function' or type(val) == 'userdata' or type(val) == 'thread' then
+			val = nil
+		end
+		exported_items[idx] = {
+			title = type(item.title) == 'string' and item.title or nil,
+			hint = type(item.hint) == 'string' and item.hint or nil,
+			active = item.active and true or false,
+			value = val,
+		}
+	end
+	mp.set_property_native('user-data/uosc/menu/items', exported_items)
 
 	self:update_content_dimensions()
 	self:reset_navigation()

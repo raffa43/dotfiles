@@ -16,7 +16,7 @@ fi
 
 zstyle :omz:plugins:ssh-agent agent-forwarding yes
 zstyle :omz:plugins:ssh-agent honor-existing yes
-zstyle :omz:plugins:ssh-agent identities ~/.config/ssh/{id_ed2551}
+zstyle :omz:plugins:ssh-agent identities ~/.ssh/id_ed2551
 
 plugins=(
   git 

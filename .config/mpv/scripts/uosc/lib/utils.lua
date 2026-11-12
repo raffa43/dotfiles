@@ -563,6 +563,13 @@ function decide_navigation_in_list(paths, current_index, delta)
 				shuffle_pool[#shuffle_pool + 1] = index
 			end
 		end
+		if #shuffle_pool == 0 then
+			for index = 1, #paths do
+				if index ~= current_index then
+					shuffle_pool[#shuffle_pool + 1] = index
+				end
+			end
+		end
 
 		math.randomseed(os.time())
 		local next_index = shuffle_pool[math.random(#shuffle_pool)]
@@ -667,6 +674,7 @@ function delete_file_navigate(delta)
 			mp.commandv('playlist-remove', playlist_pos - 1)
 		end
 	else
+		mp.command('playlist-clear')
 		mp.command('stop')
 	end
 
@@ -674,7 +682,10 @@ function delete_file_navigate(delta)
 		if Menu:is_open('open-file') then
 			Elements:maybe('menu', 'delete_value', path)
 		end
-		if path then delete_file(path) end
+		if path then
+			delete_file(path)
+			if DirPlaylist then DirPlaylist:sync_now() end
+		end
 	end
 end
 

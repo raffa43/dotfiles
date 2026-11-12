@@ -30,6 +30,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 ## Linux Specific
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   export PATH="$HOME/.local/bin:$PATH"
+  export PATH="/home/rafael-santos/.local/share/pnpm/bin:$PATH"
 
   # Hardware & Video
   export ONEDNN_MAX_CPU_ISA=AVX512_CORE_VNNI

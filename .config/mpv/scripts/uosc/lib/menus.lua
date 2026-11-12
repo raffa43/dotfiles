@@ -63,24 +63,14 @@ function create_self_updating_menu_opener(opts)
 
 		local function update() menu:update_items(opts.serializer(list, active)) end
 
-		local ignore_initial_list = true
 		local function handle_list_prop_change(name, value)
-			if ignore_initial_list then
-				ignore_initial_list = false
-			else
-				list = value
-				update()
-			end
+			list = value
+			update()
 		end
 
-		local ignore_initial_active = true
 		local function handle_active_prop_change(name, value)
-			if ignore_initial_active then
-				ignore_initial_active = false
-			else
-				active = value
-				update()
-			end
+			active = value
+			update()
 		end
 
 		local function cleanup_and_close()
