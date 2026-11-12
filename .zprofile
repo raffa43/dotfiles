@@ -48,12 +48,12 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
   
   export VK_VIDEO_DECODE_ENABLE=1
   export ANV_VIDEO_DECODE=1
-  export ANV_VIDEO_ENCODE=1
-  export ANV_DEBUG=video-decode,video-encode
+  #export ANV_VIDEO_ENCODE=1
+  export ANV_DEBUG=video-decode #,video-encode
   
   export QSG_USE_SIMPLE_ANIMATION_DRIVER=1
   export QSG_NO_VSYNC=1
-  export MOZ_ENABLE_WAYLAND=0
+  export MOZ_ENABLE_WAYLAND=1
 
   # Puro & Flutter
   export PURO_ROOT="$HOME/.puro"
