@@ -93,9 +93,7 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     export MACPORTS_PREFIX
 
     # MacOS Aliases
-    #alias mpv="/Applications/mpv.app/Contents/MacOS/mpv"
-    #alias youtube-dl="$MACPORTS_PREFIX/bin/yt-dlp --js-runtimes deno:$MACPORTS_PREFIX/bin/deno"
-    
+    alias mpwd='mpv --playlist=$(pwd) 'A
 
     #AUTOSUGGEST=$ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
     #HISTORY_SEARCH=$ZSH/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -125,7 +123,7 @@ ZSH_HIGHLIGHT_STYLES[alias]='fg=cyan,bold'
 ZSH_HIGHLIGHT_STYLES[builtin]='fg=cyan'
 ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=blue'
 ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=blue'
-ZSH_HIGHLIGHT_STYLES[path]='fg=white,underline'
+#ZSH_HIGHLIGHT_STYLES[path]='fg=white,underline'
 
 # Only initialize starship if NOT connected via SSH
 if [[ -z "$SSH_CONNECTION" ]]; then

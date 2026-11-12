@@ -25,6 +25,16 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   export LDFLAGS="-L/opt/local/lib/openssl-3 -L/opt/local/lib $LDFLAGS"
   export CPPFLAGS="-I/opt/local/include/openssl-3 -I/opt/local/include $CPPFLAGS"
   export PKG_CONFIG_PATH="/opt/local/lib/pkgconfig:/opt/local/lib/openssl-3/pkgconfig:$PKG_CONFIG_PATH"  
+
+  export MVK_CONFIG_PREFILL_METAL_COMMAND_BUFFERS=0
+  export MVK_CONFIG_RESUME_LOST_DEVICE=1
+  export MVK_CONFIG_VK_SEMAPHORE_SUPPORT_STYLE=0
+
+  export VK_VIDEO_DECODE_ENABLE=1
+  export ANV_VIDEO_DECODE=1
+  export ANV_VIDEO_ENCODE=1
+  export ANV_DEBUG=video-decode,video-encode
+
   # :$VULKAN_SDK/lib/pkgconfig
   #
 ## Linux Specific
